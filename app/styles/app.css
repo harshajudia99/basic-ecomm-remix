@@ -1,0 +1,131 @@
+.form-heading {
+    font-size: 28px;
+    color: #fff;
+    background: linear-gradient(135deg, #007BFF, #0056b3);
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.container {
+    max-width: 400px;
+    margin: auto auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px lightblue
+}
+
+.form-group {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: bold;
+}
+
+.inputfield,
+.form-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+.inputfield:focus,
+.inputfield:focus,
+.form-select:focus {
+    border-color: #007BFF;
+}
+
+.color-picker {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #007BFF;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.form-select {
+    height: 45px;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+.form-select:focus {
+    border-color: #007BFF;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.button {
+    background: linear-gradient(135deg, #007BFF, #0056b3);
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: linear-gradient(135deg, #0056b3, #00367d);
+}
+
+.form-group:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+}
+
+/* --> table css */
+
+/* Add this CSS in a separate .css file or within your component's .tsx file with appropriate CSS-in-JS techniques like styled-components or Emotion */
+
+table {
+    width: 1000px;
+    border-collapse: collapse;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+  }
+  
+  th, td {
+    border: 1px solid #e0e0e0;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  th {
+    background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+    color: white;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f7f7f7;
+  }
+  
+  tr:hover {
+    background-color: #e2e2e2;
+  }
+
+  .prod-list-heading {
+    text-align: center;
+    margin-top: 75px;
+    color: #dc6969;
+  }
+  
