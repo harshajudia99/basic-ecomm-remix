@@ -1,44 +1,22 @@
-import { ActionFunction, json, redirect } from '@remix-run/node';
-import React, { useState, ChangeEvent } from 'react';
-import { createProduct } from '~/utils/product.server';
+import { LoaderFunction, json, redirect } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
+import { getProductById } from '~/utils/product.server';
+import { useState } from 'react'
 
-interface FormData {
-  pname: string;
-  sku: string;
-  price: string;
-  color: string;
-  size: string;
-  status: string;
-}
 
-export const action: ActionFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({params}) => {
+  const { productId } = params
 
-  const form = await request.formData()
-
-  const pname = form.get('pname')
-  const sku = form.get('sku')
-  const price = form.get('price')
-  const color = form.get('color')
-  const size = form.get('size')
-  const status = form.get('status')
-
-  if (
-    typeof pname !== 'string' ||
-    typeof sku !== 'string' ||
-    typeof price !== 'string' ||
-    typeof color !== 'string' ||
-    typeof size !== 'string' ||
-    typeof status !== 'string'
-  ) {
-    return json({ error: `Invalid Form Data` }, { status: 400 })
+  if (typeof productId !== 'string') {
+    return redirect('/home')
   }
+  let product = await getProductById(productId)
+  return json({ product, productId });
+};
 
-  await createProduct(pname, sku, price, color, size, status);
+const UpdateProduct: React.FC = () => {
 
-  return redirect('/products')
-}
-
-const AddProduct: React.FC = () => {
+  const {product} = useLoaderData<typeof loader>()
 
   const [formData, setFormData] = useState<FormData>({
     pname: '',
@@ -54,6 +32,7 @@ const AddProduct: React.FC = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  
   return (
     <div className="container">
       <h2 className="form-heading">Add Product</h2>
@@ -139,4 +118,4 @@ const AddProduct: React.FC = () => {
   );
 };
 
-export default AddProduct;
+export default UpdateProduct;
