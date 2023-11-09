@@ -8,7 +8,7 @@ export const loader: LoaderFunction = async ({params}) => {
   const { productId } = params
 
   if (typeof productId !== 'string') {
-    return redirect('/home')
+    return redirect('/products')
   }
   let product = await getProductById(productId)
   return json({ product, productId });
