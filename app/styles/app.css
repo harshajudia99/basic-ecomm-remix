@@ -128,4 +128,43 @@ table {
     margin-top: 75px;
     color: #dc6969;
   }
+
+  .add-product-btn {
+    background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+    color: #fff;
+    border: none;
+    height: 35px;
+  }
+
+  .add-btn-txt {
+    text-decoration: none;
+    color: white;
+  }
+
+  .add-btn-container{
+    width: 1000px;
+    margin: 10px auto;
+    text-align: end;
+  }
+
+  .btn {
+    background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+    color: #fff;
+    border: none;
+    height: 23px;
+  }
+  .btn-txt {
+    text-decoration: none;
+    color: white;
+  }
+
+  .btn-container{
+    display: flex;
+    justify-content: center;
+  }
+
+  .update-btn {
+    margin-right: 10px;
+  }
+ 
   

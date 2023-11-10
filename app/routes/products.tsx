@@ -9,7 +9,7 @@ interface Product {
   color: string;
   size: string;
   status: string;
-  id: string; 
+  id: string;
 }
 
 export const loader: LoaderFunction = async () => {
@@ -19,17 +19,14 @@ export const loader: LoaderFunction = async () => {
 
 export default function Products() {
   const { products } = useLoaderData<{ products: Product[] }>();
-  
-
-const handleDelete = async (id: string) => {
-  console.log(id)
-  await deleteProduct(id);
-}
 
 
   return (
     <div>
       <h1 className="prod-list-heading">Products List</h1>
+      <div className="add-btn-container">
+        <button className="add-product-btn"><Link to={'/addproduct'} className="add-btn-txt">Add Product</Link></button>
+      </div>
       <table>
         <thead>
           <tr>
@@ -52,8 +49,10 @@ const handleDelete = async (id: string) => {
               <td>{product.size}</td>
               <td>{product.status}</td>
               <td>
-                <button><Link to={`/updateproduct/${product.id}`}>Update</Link></button>
-                <button onClick={() => handleDelete(product.id)}>Delete</button>
+                <div className="btn-container">
+                  <button className="btn update-btn"><Link to={`/updateproduct/${product.id}`} className="btn-txt">Update</Link></button>
+                  <button className="btn"><Link to={`/deleteproduct/${product.id}`} className="btn-txt">Delete</Link></button>
+                </div>
               </td>
             </tr>
           ))}
