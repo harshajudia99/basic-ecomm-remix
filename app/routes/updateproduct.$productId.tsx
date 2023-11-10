@@ -78,7 +78,7 @@ const UpdateProduct: React.FC = () => {
   
   return (
     <div className="container">
-      <h2 className="form-heading">Add Product</h2>
+      <h2 className="form-heading">Update Product</h2>
       <form method="post">
         <div className="form-group">
           <label htmlFor="pname">Product Name</label>
