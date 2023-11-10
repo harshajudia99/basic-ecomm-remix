@@ -51,7 +51,8 @@ export default function Products() {
               <td>
                 <div className="btn-container">
                   <button className="btn update-btn"><Link to={`/updateproduct/${product.id}`} className="btn-txt">Update</Link></button>
-                  <button className="btn"><Link to={`/deleteproduct/${product.id}`} className="btn-txt">Delete</Link></button>
+                  <button className="btn update-btn"><Link to={`/deleteproduct/${product.id}`} className="btn-txt">Delete</Link></button>
+                  <button className="btn"><Link to={`/viewproduct/${product.id}`} className="btn-txt">View</Link></button>
                 </div>
               </td>
             </tr>

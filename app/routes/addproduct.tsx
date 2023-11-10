@@ -49,8 +49,17 @@ const AddProduct: React.FC = () => {
     status: 'Enable',
   });
 
+
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+
+    if (name === 'sku') {
+      const alphanumericRegex = /^[a-zA-Z0-9]*$/;
+      if (!alphanumericRegex.test(value)) {
+        return;
+      }
+    }
+
     setFormData({ ...formData, [name]: value });
   };
 
@@ -119,7 +128,7 @@ const AddProduct: React.FC = () => {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="size">Size</label>
+          <label htmlFor="size">Status</label>
           <select
             id="status"
             name="status"

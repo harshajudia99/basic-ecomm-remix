@@ -1,10 +1,10 @@
-import { ActionFunction, LoaderFunction, json, redirect } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
-import { getProductById, updateProduct } from '~/utils/product.server';
-import { ChangeEvent, useEffect, useState } from 'react'
+import { LoaderFunction, json, redirect } from '@remix-run/node';
+import { Link, useLoaderData } from '@remix-run/react';
+import { getProductById } from '~/utils/product.server';
+import { useEffect, useState } from 'react'
 
 
-export const loader: LoaderFunction = async ({params}) => {
+export const loader: LoaderFunction = async ({ params }) => {
   const { productId } = params
 
   if (typeof productId !== 'string') {
@@ -24,39 +24,11 @@ interface FormData {
 }
 
 
-export const action: ActionFunction = async ({ request, params }) => {
 
-  const { productId } = params
 
-  const form = await request.formData()
+const ViewProduct: React.FC = () => {
 
-  const pname = form.get('pname')
-  const sku = form.get('sku')
-  const price = form.get('price')
-  const color = form.get('color')
-  const size = form.get('size')
-  const status = form.get('status')
-
-  if (
-    typeof productId !== 'string' ||
-    typeof pname !== 'string' ||
-    typeof sku !== 'string' ||
-    typeof price !== 'string' ||
-    typeof color !== 'string' ||
-    typeof size !== 'string' ||
-    typeof status !== 'string'
-  ) {
-    return json({ error: `Invalid Form Data` }, { status: 400 })
-  }
-
-  await updateProduct(productId, {pname, sku, price, color, size, status});
-
-  return redirect('/products')
-}
-
-const UpdateProduct: React.FC = () => {
-
-  const {product} = useLoaderData<typeof loader>()
+  const { product } = useLoaderData<typeof loader>()
 
   const [updateFormData, setUpdateFormData] = useState<FormData>({
     pname: '',
@@ -71,14 +43,10 @@ const UpdateProduct: React.FC = () => {
     setUpdateFormData(product);
   }, [product]);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setUpdateFormData({ ...updateFormData, [name]: value });
-  };
-  
+
   return (
     <div className="container">
-      <h2 className="form-heading">Update Product</h2>
+      <h2 className="form-heading">View Product</h2>
       <form method="post">
         <div className="form-group">
           <label htmlFor="pname">Product Name</label>
@@ -90,7 +58,7 @@ const UpdateProduct: React.FC = () => {
             placeholder="Enter product name"
             required
             value={updateFormData.pname}
-            onChange={handleChange}
+            disabled
           />
         </div>
         <div className="form-group">
@@ -103,7 +71,7 @@ const UpdateProduct: React.FC = () => {
             placeholder="Enter SKU"
             required
             value={updateFormData.sku}
-            onChange={handleChange}
+            disabled
           />
         </div>
         <div className="form-group">
@@ -117,12 +85,12 @@ const UpdateProduct: React.FC = () => {
             placeholder="Enter price"
             required
             value={updateFormData.price}
-            onChange={handleChange}
+            disabled
           />
         </div>
         <div className="form-group">
           <label htmlFor="color">Color</label>
-          <input type="color" id="color" name="color" value={updateFormData.color} onChange={handleChange} />
+          <input type="color" id="color" name="color" value={updateFormData.color} disabled />
         </div>
         <div className="form-group">
           <label htmlFor="size">Size</label>
@@ -131,7 +99,7 @@ const UpdateProduct: React.FC = () => {
             name="size"
             className="form-select"
             value={updateFormData.size}
-            onChange={handleChange}
+            disabled
           >
             <option value="S">S</option>
             <option value="M">M</option>
@@ -147,18 +115,19 @@ const UpdateProduct: React.FC = () => {
             name="status"
             className="form-select"
             value={updateFormData.status}
-            onChange={handleChange}
+            disabled
           >
             <option value="Enable">Enable</option>
             <option value="Disable">Disable</option>
           </select>
         </div>
-        <button type="submit" className="button">
-          Submit
-        </button>
+
       </form>
+      <button className='button'>
+        <Link to={'/products'} className="btn-txt">Close</Link>
+      </button>
     </div>
   );
 };
 
-export default UpdateProduct;
+export default ViewProduct;
