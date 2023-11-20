@@ -22,7 +22,7 @@ export default function Products() {
   const navigate = useNavigate()
 
   const handleDelete = async (productId: string, productName: string) => {
-    const shouldDelete = window.confirm(`Are you sure you want to delete '${productName}' product?`);
+    const shouldDelete = window.confirm(`Are you sure you want to delete product '${productName}' ?`);
     if (shouldDelete) {
       navigate(`/deleteproduct/${productId}`)
     }
