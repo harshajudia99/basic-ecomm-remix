@@ -169,3 +169,6 @@ tr:hover {
   margin-right: 10px;
 }
 
+.del-btn {
+  cursor: pointer;
+}

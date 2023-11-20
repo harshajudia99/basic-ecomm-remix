@@ -1,6 +1,6 @@
-import { LoaderFunction, json, redirect } from "@remix-run/node"
-import { Link, useLoaderData } from "@remix-run/react"
-import { deleteProduct, getProducts } from "~/utils/product.server"
+import { LoaderFunction, json } from "@remix-run/node"
+import { Link, useLoaderData, useNavigate } from "@remix-run/react"
+import { getProducts } from "~/utils/product.server"
 
 interface Product {
   pname: string;
@@ -19,7 +19,14 @@ export const loader: LoaderFunction = async () => {
 
 export default function Products() {
   const { products } = useLoaderData<{ products: Product[] }>();
+  const navigate = useNavigate()
 
+  const handleDelete = async (productId: string, productName: string) => {
+    const shouldDelete = window.confirm(`Are you sure you want to delete '${productName}' product?`);
+    if (shouldDelete) {
+      navigate(`/deleteproduct/${productId}`)
+    }
+  };
 
   return (
     <div>
@@ -51,7 +58,12 @@ export default function Products() {
               <td>
                 <div className="btn-container">
                   <button className="btn update-btn"><Link to={`/updateproduct/${product.id}`} className="btn-txt">Update</Link></button>
-                  <button className="btn update-btn"><Link to={`/deleteproduct/${product.id}`} className="btn-txt">Delete</Link></button>
+                  <button
+                    className="btn update-btn del-btn"
+                    onClick={() => handleDelete(product.id, product.pname)}
+                  >
+                    Delete
+                  </button>
                   <button className="btn"><Link to={`/viewproduct/${product.id}`} className="btn-txt">View</Link></button>
                 </div>
               </td>
